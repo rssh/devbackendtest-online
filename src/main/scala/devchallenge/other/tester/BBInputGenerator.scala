@@ -24,8 +24,8 @@ object BBInputGenerator {
         options: BBInputGeneratorOptions
         ): Seq[BBInput] = {
 
-      val traces = (1 to nPhones) map (x => Seq(generateInitial(x,entropy,options)) )
-
+      //val traces = (1 to nPhones) map (x => Seq(generateInitial(x,entropy,options)) )
+      //Secret
 
 
        ???

@@ -17,7 +17,7 @@ object GetBBOutput {
       case Flavor520154416683 => Future failed (new RuntimeException("not implemented"))
       case Flavor762141944277 => get1(url, bBOutputRequest)
       case Flavor811125320161 => get2(url, bBOutputRequest)
-      case _ => ???
+      case Flavor913136672544 => get2(url, bBOutputRequest)
     }
 
   }

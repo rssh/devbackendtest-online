@@ -16,11 +16,11 @@ case object Flavor913136672544 extends RequestFlavor
 object ExternalTest {
 
 
-  val flavor: RequestFlavor = Flavor811125320161
+  val flavor: RequestFlavor = Flavor913136672544
 
   def main(args: Array[String]):Unit = {
     val baseUrl = if (args.length < 2) {
-      val defaultUrl = "http://127.0.0.1:8080/ourell"
+      val defaultUrl = "http://127.0.0.1:3000/ourell"
       Console.println(s"use default app:  ${defaultUrl}")
       defaultUrl
     } else {

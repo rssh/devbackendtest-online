@@ -15,6 +15,7 @@ object PostBBInput {
     requestFlavor match {
       case Flavor520154416683 => postJson1(url,bBInput)
       case Flavor762141944277 => postForm2(url,bBInput)
+      case Flavor811125320161 => postJson3(url,bBInput)
       case _ => ???
     }
   }
@@ -97,6 +98,35 @@ object PostBBInput {
       ++ bBInput.timestamp.map( t => ("date_time", t.format(DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm:ss"))))
       )
     val request = sttp.post(uri"${url}/bbinput").body(map)
+    request.send()
+  }
+
+  def postJson3(url: String, bBInput: BBInput): Future[Response[String]] = {
+    val optIp = bBInput.ip.map(s =>
+      s""",
+         | "IP" : "${s}"
+      """.stripMargin).getOrElse("")
+    val optTimestamp = bBInput.timestamp.map{t =>
+      s"""
+         |,
+         |"timestamp": "${t.format(DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm:ss"))}"
+       """.stripMargin}.getOrElse("")
+    val json = s"""
+                  |{
+                  | "number" : "${bBInput.number}"
+                  | ,
+                  | "IMEI" : "${bBInput.imei}"
+                  | ,
+                  | "Coordinares" : [
+                  |    ${bBInput.coordinates.latitude},
+                  |    ${bBInput.coordinates.longitude}
+                  | ]
+                  | ${optIp}
+                  | ${optTimestamp}
+                  |}
+    """.stripMargin
+    System.err.println(s"json=${json}")
+    val request = sttp.post(uri"${url}/bbinput").contentType("application/json").body(json)
     request.send()
   }
 

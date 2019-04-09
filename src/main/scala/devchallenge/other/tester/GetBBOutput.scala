@@ -15,13 +15,14 @@ object GetBBOutput {
   def get(url:String, bBOutputRequest: BBOutputRequest, requestFlavor: RequestFlavor): Future[Response[String]] = {
     requestFlavor match {
       case Flavor520154416683 => Future failed (new RuntimeException("not implemented"))
-      case Flavor762141944277 => getJson(url, bBOutputRequest)
+      case Flavor762141944277 => get1(url, bBOutputRequest)
+      case Flavor811125320161 => get2(url, bBOutputRequest)
       case _ => ???
     }
 
   }
 
-  def getJson(url: String, request: BBOutputRequest): Future[Response[String]] = {
+  def get1(url: String, request: BBOutputRequest): Future[Response[String]] = {
      val map = (Map("number" -> request.number,
                    )
        ++ request.from.map(x => ("from",x.format(DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm:ss"))))
@@ -31,5 +32,18 @@ object GetBBOutput {
      val requestUrl = uri"${url}/bboutput?${map}"
      sttp.get(requestUrl).send()
   }
+
+  def get2(url: String, request: BBOutputRequest): Future[Response[String]] = {
+    val map = (Map("number" -> request.number,
+    )
+      ++ request.from.map(x => ("From",x.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))))
+      ++ request.to.map(x => ("To",x.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))))
+      ++ request.outputFormat.map(("Output",_))
+      )
+    val requestUrl = uri"${url}/bboutput?${map}"
+    System.err.println(s"url=${requestUrl}")
+    sttp.get(requestUrl).send()
+  }
+
 
 }

@@ -1,8 +1,8 @@
 package devchallenge.other.tester
 
 case class Coordinates(
-    longitude: Double,
-    latitude: Double
+    latitude: Double,
+    longitude: Double
 )
 
 

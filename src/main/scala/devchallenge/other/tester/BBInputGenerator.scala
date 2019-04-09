@@ -23,13 +23,16 @@ object BBInputGenerator {
         entropy: Random,
         options: BBInputGeneratorOptions
         ): Seq[BBInput] = {
+
+      val traces = (1 to nPhones) map (x => Seq(generateInitial(x,entropy,options)) )
+
+
+
        ???
     }
 
 
     def generateInitial(n:Int, entropy: Random, options:BBInputGeneratorOptions): BBInput = {
-      ???
-      /*
         import options.rectangleArea._
         BBInput(
             number = s"${n}",
@@ -41,12 +44,9 @@ object BBInputGenerator {
                 minLng + entropy.nextDouble()*(maxLng - minLng)
             )
         )
-        */
     }
 
     def generateNext(n:Int, entropy: Random, step: Int, prev: BBInput, options: BBInputGeneratorOptions): BBInput = {
-      ???
-      /*
       val near = options.minDistances.filter(_._1 == n)
       val (kmX,kmY) = options.rectangleArea.stepKm()
       val rx = (entropy.nextDouble() - 0.5)*2
@@ -66,7 +66,6 @@ object BBInputGenerator {
         timestamp = prev.timestamp.map(_.plusSeconds(nSeconds)),
         coordinates = Coordinates(nx,ny)
       )
-      */
     }
 
 
@@ -74,7 +73,7 @@ object BBInputGenerator {
     private def nToIp4(n:Int, options:BBInputGeneratorOptions):String = {
         val b3 = (n >> 8) & 0xFF
         val b4 = (n & 0xFF)
-        s"${options.ipPrefix}.${b3}.${b4}"
+        s"${options.ipPrefix}${b3}.${b4}"
     }
 
 

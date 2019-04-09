@@ -11,7 +11,6 @@ object Coordinates {
 
   // return distance in km.
   def distance( x: Coordinates, y: Coordinates): Double = {
-    /*
     val R = 6371
     val dLat = deg2rad(y.latitude - x.latitude)
     val dLon = deg2rad(y.longitude - x.latitude)
@@ -23,8 +22,6 @@ object Coordinates {
     val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     val d = R * c; // Distance in km
     d
-    */
-    ???
   }
 
   def deg2rad(deg:Double): Double =

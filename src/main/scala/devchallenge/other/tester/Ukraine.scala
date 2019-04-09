@@ -23,7 +23,6 @@ object Ukraine extends InRectangleArea {
       Coordinates(46.111477, 33.689393)
     )
 
-  /*
     object Kyiv extends InRectangleArea {
 
       val Center = Coordinates(50.45466, 30.5238)
@@ -63,6 +62,5 @@ object Ukraine extends InRectangleArea {
       override def maxLng: Double = 24.079483
     }
 
-*/
 
 }
